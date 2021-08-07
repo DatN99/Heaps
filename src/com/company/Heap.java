@@ -20,6 +20,7 @@ package com.company;
  * height of the node that was deleted. It can be also described similarly to up_heapify's time complexity
  */
 
+
 public class Heap {
 
     private int[] array = new int[30];
