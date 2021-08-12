@@ -1,7 +1,7 @@
 package com.company;
 
 /**
- * This class implements a max heap.
+ * This class implements a max heap and heapsort
  *
  * Searching for the next available spot is O(1) since the next available spot is stored as int size
  * Searching for a specific value is O(N) time since all values are iterated over to find the right one
@@ -18,6 +18,13 @@ package com.company;
  * Down_heapify takes O(log N) time as the average/worst-case as it is somewhat common for the replacement node to have to traverse
  * down the list until the tree follows the heap properties. The time complexity of deletion is more dependent on the
  * height of the node that was deleted. It can be also described similarly to up_heapify's time complexity
+ *
+ *
+ * Heapsort takes O(nlogn) time. In other words, it's O(h) = O(nlogn).
+ * For example, for a heap with 8 elements, there will be 3 levels. O(h) = O(3) = O(log8) = 3
+ * For each level, down_heapify is called which takes O(nlogn) time.
+ * In addition, an element swap happens between the first and current last element which takes O(n) time.
+ * Putting it all together, heapsort takes O(nlogn) average/worst case scenario
  */
 
 public class Heap {
@@ -57,6 +64,7 @@ public class Heap {
     public void print(){
         String string = "";
 
+
         for (int i = 0; i < size; i ++){
             string += array[i] + ", ";
         }
@@ -88,9 +96,10 @@ public class Heap {
 
     }
 
-    private void down_heapify(int index){
+    public void down_heapify(int index){
         int left_child = (2*index) +1;
         int right_child = (2*index) +2;
+
 
         if (left_child > size-1 && right_child > size-1){
             return;
@@ -114,8 +123,32 @@ public class Heap {
             }
 
             swap(index, curr_largest);
+
             down_heapify(curr_largest);
+
+
+
         }
 
+    }
+
+    public int[] heapsort(){
+
+        int start = 0;
+        int end = size-1;
+
+        int orig_size = size;
+
+
+        while (end > start){
+            down_heapify(start);
+            swap(start, end);
+            end--;
+            size--;
+        }
+
+        size = orig_size;
+
+        return array;
     }
 }
