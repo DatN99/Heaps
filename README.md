@@ -1,5 +1,4 @@
 # Heaps
-My own implementation of a Max Heap
 
 src/com/company/Heap.java contains a class that implements a max heap and heapsort
 
